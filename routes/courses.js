@@ -9,7 +9,7 @@ const {
 
 const Course = require('../models/Course');
 const advancedResults = require('../middleware/advancedResults');
-const { auth } = require('../middleware/auth');
+const { auth, role } = require('../middleware/auth');
 
 const router = express.Router({ mergeParams: true });
 
@@ -22,11 +22,11 @@ router
     }),
     getCourses
   )
-  .post(auth, addCourse);
+  .post(auth, role('publisher', 'admin'), addCourse);
 router
   .route('/:id')
   .get(getCourse)
-  .put(auth, updateCourse)
-  .delete(auth, deleteCourse);
+  .put(auth, role('publisher', 'admin'), updateCourse)
+  .delete(auth, role('publisher', 'admin'), deleteCourse);
 
 module.exports = router;
