@@ -13,6 +13,6 @@ const { auth } = require('../middleware/auth');
 router.post('/register', register);
 router.post('/login', login);
 router.get('/me', auth, getMe);
-router.get('/forgotpassword', forgotPassword);
+router.post('/forgotpassword', forgotPassword);
 
 module.exports = router;
